@@ -1,3 +1,4 @@
+   # -*- coding: utf-8 -*-
 Import server
 Import Token
 Import definition
@@ -17,7 +18,7 @@ Import delivery pipe
   setting = [object]:<dialog>
 <setting var Server name: Cupid chat
  <setting/> 
-creation Token =[gron25485FT84584]
+<object var creation Token =[gron25485FT84584]</object>
 keygen: [jaroon864]
           }
       }
