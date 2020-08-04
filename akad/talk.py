@@ -198,3 +198,286 @@ class Talk(object):
 
     @loggedIn
     def sendGIF(self, to, path):
+return self.uploadObjTalk(path=path, type='gif', returnAs='bool', to=to)
+
+    @loggedIn
+    def sendGIFWithURL(self, to, url):
+        path = self.downloadFileURL(url, 'path')
+        return self.sendGIF(to, path)
+
+    @loggedIn
+    def sendVideo(self, to, path):
+        objectId = self.sendMessage(to=to, text=None, contentMetadata={'VIDLEN': '60000','DURATION': '60000'}, contentType = 2).id
+        return self.uploadObjTalk(path=path, type='video', returnAs='bool', objId=objectId)
+
+    @loggedIn
+    def sendVideoWithURL(self, to, url):
+        path = self.downloadFileURL(url, 'path')
+        return self.sendVideo(to, path)
+
+    @loggedIn
+    def sendAudio(self, to, path):
+        objectId = self.sendMessage(to=to, text=None, contentType = 3).id
+        return self.uploadObjTalk(path=path, type='audio', returnAs='bool', objId=objectId)
+
+    @loggedIn
+    def sendAudioWithURL(self, to, url):
+        path = self.downloadFileURL(url, 'path')
+        return self.sendAudio(to, path)
+
+    @loggedIn
+    def sendFile(self, to, path, file_name=''):
+        if file_name == '':
+            file_name = ntpath.basename(path)
+        file_size = len(open(path, 'rb').read())
+        objectId = self.sendMessage(to=to, text=None, contentMetadata={'FILE_NAME': str(file_name),'FILE_SIZE': str(file_size)}, contentType = 14).id
+        return self.uploadObjTalk(path=path, type='file', returnAs='bool', objId=objectId)
+
+    @loggedIn
+    def sendFileWithURL(self, to, url, fileName=''):
+        path = self.downloadFileURL(url, 'path')
+        return self.sendFile(to, path, fileName)
+        
+    @loggedIn
+    def sendMentionFooter(self, to, text, mid, link, icon, footer):
+        arr = []
+        list_text=''
+        list_text+=' @dzin '
+        text=text+list_text
+        name='@dzin '
+        ln_text=text.replace('\n',' ')
+        if ln_text.find(name):
+            line_s=int(ln_text.index(name))
+            line_e=(int(line_s)+int(len(name)))
+        arrData={'S': str(line_s), 'E': str(line_e), 'M': mid}
+        arr.append(arrData)
+        contentMetadata={'AGENT_LINK': link, 'AGENT_ICON': icon, 'AGENT_NAME': footer,'MENTION':str('{"MENTIONEES":' + json.dumps(arr).replace(' ','') + '}')}
+        return self.sendMessage(to, text, contentMetadata)
+
+
+    """Contact"""
+        
+    @loggedIn
+    def blockContact(self, mid):
+        return self.talk.blockContact(0, mid)
+
+    @loggedIn
+    def unblockContact(self, mid):
+        return self.talk.unblockContact(0, mid)
+
+    @loggedIn
+    def findAndAddContactByMetaTag(self, userid, reference):
+        return self.talk.findAndAddContactByMetaTag(0, userid, reference)
+
+    @loggedIn
+    def findAndAddContactsByMid(self, mid):
+        return self.talk.findAndAddContactsByMid(0, mid, 0, '')
+
+    @loggedIn
+    def findAndAddContactsByEmail(self, emails=[]):
+        return self.talk.findAndAddContactsByEmail(0, emails)
+
+    @loggedIn
+    def findAndAddContactsByUserid(self, userid):
+        return self.talk.findAndAddContactsByUserid(0, userid)
+
+    @loggedIn
+    def findContactsByUserid(self, userid):
+        return self.talk.findContactByUserid(userid)
+
+    @loggedIn
+    def findContactByTicket(self, ticketId):
+        return self.talk.findContactByUserTicket(ticketId)
+
+    @loggedIn
+    def getAllContactIds(self):
+        return self.talk.getAllContactIds()
+
+    @loggedIn
+    def getBlockedContactIds(self):
+        return self.talk.getBlockedContactIds()
+
+    @loggedIn
+    def getContact(self, mid):
+        return self.talk.getContact(mid)
+
+    @loggedIn
+    def getContacts(self, midlist):
+        return self.talk.getContacts(midlist)
+
+    @loggedIn
+    def getFavoriteMids(self):
+        return self.talk.getFavoriteMids()
+
+    @loggedIn
+    def getHiddenContactMids(self):
+        return self.talk.getHiddenContactMids()
+
+    @loggedIn
+    def tryFriendRequest(self, midOrEMid, friendRequestParams, method=1):
+        return self.talk.tryFriendRequest(midOrEMid, method, friendRequestParams)
+
+    @loggedIn
+    def makeUserAddMyselfAsContact(self, contactOwnerMid):
+        return self.talk.makeUserAddMyselfAsContact(contactOwnerMid)
+
+    @loggedIn
+    def getContactWithFriendRequestStatus(self, id):
+        return self.talk.getContactWithFriendRequestStatus(id)
+
+    @loggedIn
+    def reissueUserTicket(self, expirationTime=100, maxUseCount=100):
+        return self.talk.reissueUserTicket(expirationTime, maxUseCount)
+    
+    @loggedIn
+    def cloneContactProfile(self, mid):
+        contact = self.getContact(mid)
+        profile = self.profile
+        profile.displayName = contact.displayName
+        profile.statusMessage = contact.statusMessage
+        profile.pictureStatus = contact.pictureStatus
+        if self.getProfileCoverId(mid) is not None:
+            self.updateProfileCoverById(self.getProfileCoverId(mid))
+        self.updateProfileAttribute(8, profile.pictureStatus)
+        return self.updateProfile(profile)
+
+    """Group"""
+
+    @loggedIn
+    def getChatRoomAnnouncementsBulk(self, chatRoomMids):
+        return self.talk.getChatRoomAnnouncementsBulk(chatRoomMids)
+
+    @loggedIn
+    def getChatRoomAnnouncements(self, chatRoomMid):
+        return self.talk.getChatRoomAnnouncements(chatRoomMid)
+
+    @loggedIn
+    def createChatRoomAnnouncement(self, chatRoomMid, type, contents):
+        return self.talk.createChatRoomAnnouncement(0, chatRoomMid, type, contents)
+
+    @loggedIn
+    def removeChatRoomAnnouncement(self, chatRoomMid, announcementSeq):
+        return self.talk.removeChatRoomAnnouncement(0, chatRoomMid, announcementSeq)
+
+    @loggedIn
+    def getGroupWithoutMembers(self, groupId):
+        return self.talk.getGroupWithoutMembers(groupId)
+    
+    @loggedIn
+    def findGroupByTicket(self, ticketId):
+        return self.talk.findGroupByTicket(ticketId)
+
+    @loggedIn
+    def acceptGroupInvitation(self, groupId):
+        return self.talk.acceptGroupInvitation(0, groupId)
+
+    @loggedIn
+    def acceptGroupInvitationByTicket(self, groupId, ticketId):
+        return self.talk.acceptGroupInvitationByTicket(0, groupId, ticketId)
+
+    @loggedIn
+    def cancelGroupInvitation(self, groupId, contactIds):
+        return self.talk.cancelGroupInvitation(0, groupId, contactIds)
+
+    @loggedIn
+    def createGroup(self, name, midlist):
+        return self.talk.createGroup(0, name, midlist)
+
+    @loggedIn
+    def getGroup(self, groupId):
+        return self.talk.getGroup(groupId)
+
+    @loggedIn
+    def getGroups(self, groupIds):
+        return self.talk.getGroups(groupIds)
+
+    @loggedIn
+    def getGroupsV2(self, groupIds):
+        return self.talk.getGroupsV2(groupIds)
+
+    @loggedIn
+    def getCompactGroup(self, groupId):
+        return self.talk.getCompactGroup(groupId)
+
+    @loggedIn
+    def getCompactRoom(self, roomId):
+        return self.talk.getCompactRoom(roomId)
+
+    @loggedIn
+    def getGroupIdsByName(self, groupName):
+        gIds = []
+        for gId in self.getGroupIdsJoined():
+            g = self.getCompactGroup(gId)
+            if groupName in g.name:
+                gIds.append(gId)
+        return gIds
+
+    @loggedIn
+    def getGroupIdsInvited(self):
+        return self.talk.getGroupIdsInvited()
+
+    @loggedIn
+    def getGroupIdsJoined(self):
+        return self.talk.getGroupIdsJoined()
+
+    @loggedIn
+    def updateGroupPreferenceAttribute(self, groupMid, updatedAttrs):
+        return self.talk.updateGroupPreferenceAttribute(0, groupMid, updatedAttrs)
+
+    @loggedIn
+    def inviteIntoGroup(self, groupId, midlist):
+        return self.talk.inviteIntoGroup(0, groupId, midlist)
+
+    @loggedIn
+    def kickoutFromGroup(self, groupId, midlist):
+        return self.talk.kickoutFromGroup(0, groupId, midlist)
+
+    @loggedIn
+    def leaveGroup(self, groupId):
+        return self.talk.leaveGroup(0, groupId)
+
+    @loggedIn
+    def rejectGroupInvitation(self, groupId):
+        return self.talk.rejectGroupInvitation(0, groupId)
+
+    @loggedIn
+    def reissueGroupTicket(self, groupId):
+        return self.talk.reissueGroupTicket(groupId)
+
+    @loggedIn
+    def updateGroup(self, groupObject):
+        return self.talk.updateGroup(0, groupObject)
+
+    """Room"""
+
+    @loggedIn
+    def createRoom(self, midlist):
+        return self.talk.createRoom(0, midlist)
+
+    @loggedIn
+    def getRoom(self, roomId):
+        return self.talk.getRoom(roomId)
+
+    @loggedIn
+    def inviteIntoRoom(self, roomId, midlist):
+        return self.talk.inviteIntoRoom(0, roomId, midlist)
+
+    @loggedIn
+    def leaveRoom(self, roomId):
+        return self.talk.leaveRoom(0, roomId)
+
+    """Call"""
+        
+    @loggedIn
+    def acquireCallTalkRoute(self, to):
+        return self.talk.acquireCallRoute(to)
+    
+    """Report"""
+
+    @loggedIn
+    def reportSpam(self, chatMid, memberMids=[], spammerReasons=[], senderMids=[], spamMessageIds=[], spamMessages=[]):
+        return self.talk.reportSpam(chatMid, memberMids, spammerReasons, senderMids, spamMessageIds, spamMessages)
+        
+    @loggedIn
+    def reportSpammer(self, spammerMid, spammerReasons=[], spamMessageIds=[]):
+        return self.talk.reportSpammer(spammerMid, spammerReasons, spamMessageIds)
