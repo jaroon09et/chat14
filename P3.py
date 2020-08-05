@@ -478,9 +478,10 @@ def listgrup():
  ให้ใส่ . นำหน้าคำสั่งด้วยครับ"""
     return listGrup
 
-
-
-
+def socmedia():
+    socMedia = """꧁มินทีมทดลองบอท꧂
+ SELF BOT MIN HACK
+꧁ชุดคำสั่ง ภาษาไทย꧂
 
 
 
