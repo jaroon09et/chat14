@@ -793,3 +793,214 @@ def lineBot(op):
                     return
 #==============================================================================#
              
+if ".พูด " in msg.text.lower():
+                    spl = re.split(".พูด ",msg.text,flags=re.IGNORECASE)
+                    if spl[0] == "":
+                        mts = spl[1]
+                        mtsl = mts.split()
+                        mtsTimeArg = len(mtsl) - 1
+                        mtsTime = mtsl[mtsTimeArg]
+                        del mtsl[mtsTimeArg]
+                        mtosay = " ".join(mtsl)
+                        global Rapid1To
+                        Rapid1To = msg.to
+                        RapidTime = mtsTime
+                        rmtosay = []
+                        for count in range(0,int(RapidTime)):
+                            rmtosay.insert(count,mtosay)
+                        p = Pool(20)
+                        p.map(Rapid1Say,rmtosay)
+                        p.close()
+                if text.lower() == 'help':
+                    myHelp = myhelp()
+                    line.sendMessage(to, str(myHelp))  
+                elif text.lower() == 'คำสั่ง1':
+                    helpSet = helpset()
+                    line.sendMessage(to, str(helpSet))
+                    sendMessageWithMention(to, lineMID)
+                elif text.lower() == 'คำสั่ง2':
+                    listGrup = listgrup()
+                    line.sendMessage(to, str(listGrup))
+                elif text.lower() == 'คำสั่ง3':
+                    helpSetting = helpsetting()
+                    line.sendMessage(to, str(helpSetting))
+                elif text.lower() == 'คำสั่ง4':
+                    socMedia = socmedia()
+                    line.sendMessage(to, str(socMedia))
+                elif text.lower() == 'คำสั่ง5':
+                    helpTextToSpeech = helptexttospeech()
+                    line.sendMessage(to, str(helpTextToSpeech))
+                elif text.lower() == '.sett':
+                    helpLanguange = helplanguange()
+                    line.sendMessage(to, str(helpLanguange))
+#==============================================================================#
+                elif text.lower() == '.sp':
+                    start = time.time()
+                    line.sendMessage(to, "กำลังทดสอบ")
+                    elapsed_time = time.time() - start
+                    line.sendMessage(msg.to, "[ %s Seconds ] [ " % (elapsed_time) + str(int(round((time.time() - start) * 1000)))+" ms ]")
+                elif text.lower() == 'sp':
+                    start = time.time()
+                    line.sendMessage(to, "กำลังทดสอบ")
+                    elapsed_time = time.time() - start
+                    line.sendMessage(msg.to, "[ %s Seconds ] [ " % (elapsed_time) + str(int(round((time.time() - start) * 1000)))+" ms ]")
+                elif text.lower() == '.เริ่มใหม่':
+                    line.sendMessage(to, "กำลังเริ่มต้นใหม่ ... โปรดรอสักครู่ ..")
+                    line.sendMessage(to, "Success Restarting.")
+                    restartBot()
+                elif text.lower() == '.ออน':
+                    timeNow = time.time()
+                    runtime = timeNow - botStart
+                    runtime = format_timespan(runtime)
+                    line.sendMessage(to, "ระยะเวลาการทำงานของบอท {}".format(str(runtime)))
+                elif text.lower() == '.ข้อมูล':
+                    try:
+                        arr = []
+                        owner = "ufad8bc98e4811b51115039219b8f8faf"
+                        creator = line.getContact(owner)
+                        contact = line.getContact(lineMID)
+                        grouplist = line.getGroupIdsJoined()
+                        contactlist = line.getAllContactIds()
+                        blockedlist = line.getBlockedContactIds()
+                        ret_ = "╔══[BY.มินทีมทดลองบอท]"
+                        ret_ += "\n╠۝ ชื่อ ═ {}".format(contact.displayName)
+                        ret_ += "\n╠۝ กลุ่ม ═ {}".format(str(len(grouplist)))
+                        ret_ += "\n╠۝ เพื่อน ═ {}".format(str(len(contactlist)))
+                        ret_ += "\n╠۝ บล็อค ═ {}".format(str(len(blockedlist)))
+                        ret_ += "\n╠══[สถานะ] ═ {}".format(contact.statusMessage)
+                        ret_ += "\n╠۝ ผู้สร้าง ═ {}".format(creator.displayName)
+                        ret_ += "\n╚══[BY.มินทีมทดลองบอท]"
+                        line.sendContact(to, owner)
+                        line.sendMessage(to, str(ret_))
+                    except Exception as e:
+                        line.sendMessage(msg.to, str(e))
+#==============================================================================#
+                elif text.lower() == '.เช็ค':
+                    try:
+                        ret_ = "╔════[ Status ]═════┓"
+                        if settings["autoBlock"] == True: ret_ += "\n╠ ออโต้บล็อค✔"
+                        else: ret_ += "\n╠ ออโต้บล็อค   ✘ "
+                        if settings["autoAdd"] == True: ret_ += "\n╠ ออโต้แอด✔"
+                        else: ret_ += "\n╠ ออโต้แอด   ✘ "
+                        if settings["autoJoinTicket"] == True: ret_ += "\n╠ มุดลิ้ง✔"
+                        else: ret_ += "\n╠ มุดลิ้ง   ✘ "
+                        if settings["autoJoin"] == True: ret_ += "\n╠ เข้าห้องออโต้ ✔"
+                        else: ret_ += "\n╠ เข้าห้องออโต้    ✘ "
+                        if settings["Api"] == True: ret_ += "\n╠ บอทApi✔"
+                        else: ret_ += "\n╠ บอทApi   ✘ "
+                        if settings["Aip"] == True: ret_ += "\n╠ แสกนคำพูด+คำสั่งบิน✔"
+                        else: ret_ += "\n╠ แสกนคำพูด+คำสั่งบิน   ✘ "
+                        if settings["Wc"] == True: ret_ += "\n╠ ข้อความต้อนรับสมาชิก ✔"
+                        else: ret_ += "\n╠ ข้อความต้อนรับสมาชิก    ✘ "
+                        if settings["Lv"] == True: ret_ += "\n╠ ข้อความอำลาสมาชิก ✔"
+                        else: ret_ += "\n╠ ข้อความอำลาสมาชิก    ✘ "
+                        if settings["Nk"] == True: ret_ += "\n╠ ข้อความแจ้งเตือนคนลบ ✔"
+                        else: ret_ += "\n╠ ข้อความแจ้งเตือนคนลบ    ✘ "
+                        if settings["autoCancel"]["on"] == True:ret_+="\n╠ ปฏิเสธกลุ่มเชิญที่มีสมาชิกต่ำกว่า: " + str(settings["autoCancel"]["members"]) + " → ✔"
+                        else: ret_ += "\n╠ ปฏิเสธกลุ่มเชิญ    ✘ "						
+                        if settings["autoLeave"] == True: ret_ += "\n╠ ออกแชทรวม ✔"
+                        else: ret_ += "\n╠ ออกแชทรวม ✘ "
+                        if settings["autoRead"] == True: ret_ += "\n╠ อ่านออโต้ ✔"
+                        else: ret_ += "\n╠ อ่านออโต้   ✘ "				
+                        if settings["checkContact"] == True: ret_ += "\n╠ อ่านคท ✔"
+                        else: ret_ += "\n╠ อ่านคท        ✘ "
+                        if settings["checkPost"] == True: ret_ += "\n╠ เช็คโพส ✔"
+                        else: ret_ += "\n╠ เช็คโพส        ✘ "
+                        if settings["checkSticker"] == True: ret_ += "\n╠ Sticker ✔"
+                        else: ret_ += "\n╠ Sticker        ✘ "
+                        if settings["detectMention"] == True: ret_ += "\n╠ ตอบกลับคนแทค ✔"
+                        else: ret_ += "\n╠ ตอบกลับคนแทค ✘ "
+                        if settings["potoMention"] == True: ret_ += "\n╠ แสดงภาพคนแทค ✔"
+                        else: ret_ += "\n╠ แสดงภาพคนแทค ✘ "
+                        if settings["kickMention"] == True: ret_ += "\n╠ เตะคนแทค ✔"
+                        else: ret_ += "\n╠ เตะคนแทค ✘ "
+                        if settings["delayMention"] == True: ret_ += "\n╠ แทคกลับคนแทค ✔"
+                        else: ret_ += "\n╠ แทคกลับคนแทค ✘ "
+                        if RfuProtect["inviteprotect"] == True: ret_ += "\n╠ กันเชิญ ✔"
+                        else: ret_ += "\n╠ กันเชิญ ✘ "
+                        if RfuProtect["cancelprotect"] == True: ret_ += "\n╠ กันยกเชิญ ✔"
+                        else: ret_ += "\n╠ กันยกเชิญ ✘ "
+                        if RfuProtect["protect"] == True: ret_ += "\n╠ ป้องกัน ✔"
+                        else: ret_ += "\n╠ ป้องกัน ✘ "
+                        if RfuProtect["linkprotect"] == True: ret_ += "\n╠ ป้องกันเปิดลิ้ง ✔"
+                        else: ret_ += "\n╠ ป้องกันเปิดลิ้ง ✘ "
+                        if RfuProtect["Protectguest"] == True: ret_ += "\n╠ ป้องกันสมาชิก ✔"
+                        else: ret_ += "\n╠ ป้องกันสมาชิก ✘ "
+                        if RfuProtect["Protectjoin"] == True: ret_ += "\n╠ ป้องกันเข้ากลุ่ม ✔"
+                        else: ret_ += "\n╠ ป้องกันเข้ากลุ่ม ✘ "						
+                        ret_ += "\n[BY.มินทีมทดลองบอท]"
+                        line.sendMessage(to, str(ret_))
+                    except Exception as e:
+                        line.sendMessage(msg.to, str(e))
+                elif text.lower() == '.เปิดบล็อค':
+                    settings["autoBlock"] = True
+                    line.sendMessage(to, "Autoblock enabled.")
+                elif text.lower() == '.ปิดบล็อค':
+                    settings["autoBlock"] = False
+                    line.sendMessage(to, "Autoblock disabled.")
+                elif text.lower() == '.เปิดแอด':
+                    settings["autoAdd"] = True
+                    line.sendMessage(to, "ออโต้แอดทำงาน enabled.")
+                elif text.lower() == '.ปิดแอด':
+                    settings["autoAdd"] = False
+                    line.sendMessage(to, "ออโต้แอดปิดทำงาน disabled.")                                        
+                elif text.lower() == '.เปิดเข้า':
+                    settings["autoJoin"] = True
+                    line.sendMessage(to, "Autojoin enabled.")
+                elif text.lower() == '.ปิดเข้า':
+                    settings["autoJoin"] = False
+                    line.sendMessage(to, "Auto Join disabled.")
+                elif "gcancel:" in msg.text:
+                    try:
+                        strnum = msg.text.replace("gcancel:","")
+                        if strnum == "off":
+                                settings["autoCancel"]["on"] = False
+                                if settings["lang"] == "JP":
+                                    line.sendText(msg.to,str(settings["eror"]))
+                                else:
+                                    line.sendText(msg.to,"关了邀请拒绝。要时开请指定人数发送")
+                        else:
+                                num =  int(strnum)
+                                settings["autoCancel"]["on"] = True
+                                if settings["lang"] == "JP":
+                                    line.sendText(msg.to, " สมาชิกในกลุ่มที่ไม่ถึง" + strnum + "จะถูกปฏิเสธคำเชิญโดยอัตโนมัติ")
+                                else:
+                                    line.sendText(msg.to,strnum + "使人以下的小组用自动邀请拒绝")
+                    except:
+                        if settings["lang"] == "JP":
+                                line.sendText(msg.to,str(settings["eror"]))
+                        else:
+                                line.sendText(msg.to,"Bizarre ratings")					
+                elif text.lower() == '.เปิดออก':
+                    settings["autoLeave"] = True
+                    line.sendMessage(to, "เปิดระบบออกแชทรวมอัตโนมัติ")
+                elif text.lower() == '.ปิดออก':
+                    settings["autoLeave"] = False
+                    line.sendMessage(to, "Autoleave disabled.")
+                elif text.lower() == '.เปิดอ่าน':
+                    settings["autoRead"] = True
+                    line.sendMessage(to, "Autoread message enabled.")
+                elif text.lower() == '.ปิดอ่าน':
+                    settings["autoRead"] = False
+                    line.sendMessage(to, "Autoread message disabled.")
+                elif text.lower() == '.เปิดติ๊ก':
+                    settings["checkSticker"] = True
+                    line.sendMessage(to, "Check sticker enabled.")
+                elif text.lower() == '.ปิดติ๊ก':
+                    settings["checkSticker"] = False
+                    line.sendMessage(to, "Check sticker disabled.")
+                elif text.lower() == '.เปิดมุด':
+                    settings["autoJoinTicket"] = True
+                    line.sendMessage(to, "Autojoin byTicket  enabled.")
+                elif text.lower() == '.ปิดมุด':
+                    settings["autoJoinTicket"] = False
+                    line.sendMessage(to, "Autojoin byTicket  disabled.")
+                elif text.lower() == '.เปิดเผือก':
+                    settings["unsendMessage"] = True
+                    line.sendMessage(to, "unsendMessage  enabled.")
+                elif text.lower() == '.ปิดเผือก':
+                    settings["unsendMessage"] = False
+                    line.sendMessage(to, "unsendMessage disabled.")           
+#==============================================================================#
+                elif msg.text.lower() == "ผม":
+                
