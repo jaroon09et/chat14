@@ -793,7 +793,7 @@ def lineBot(op):
                 if text is None:
                     return
 #==============================================================================#
- if ".พูด " in msg.text.lower():
+                if ".พูด " in msg.text.lower():
                     spl = re.split(".พูด ",msg.text,flags=re.IGNORECASE)
                     if spl[0] == "":
                         mts = spl[1]
