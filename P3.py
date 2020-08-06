@@ -3972,18 +3972,549 @@ if ".พูด " in msg.text.lower():
 #==============FINNISHING PROTECT========================#
                 elif msg.text.lower() == '.เปิดรับแขก':
                         if settings["Wc"] == True:
+if settings["Wc"] == True:
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"เปิดข้อความต้อนรับเมื่อมีสมาชิกเข้ากลุ่ม   ")
+                        else:
+                            settings["Wc"] = True
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"เปิดข้อความต้อนรับเมื่อมีสมาชิกเข้ากลุ่ม   ")
+                elif msg.text.lower() == '.ปิดรับแขก':
+                        if settings["Wc"] == False:
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"ปิดข้อความต้อนรับเมื่อมีสมาชิกเข้ากลุ่ม   ")
+                        else:
+                            settings["Wc"] = False
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"ปิดข้อความต้อนรับเมื่อมีสมาชิกเข้ากลุ่ม   ")
+                                
+                elif msg.text.lower() == '.เปิดทักเตะ':
+                        if settings["Nk"] == True:
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"เปิดข้อความแจ้งเตือนเมื่อมีคนลบสมาชิกในกลุ่ม...")
+                        else:
+                            settings["Nk"] = True
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"เปิดข้อความแจ้งเตือนเมื่อมีคนลบสมาชิกในกลุ่ม...")
+                                
+                elif msg.text.lower() == '.ปิดทักเตะ':
+                        if settings["Nk"] == False:
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"ปิดข้อความแจ้งเตือนเมื่อมีคนลบสมาชิกในกลุ่มแล้ว..")
+                        else:
+                            settings["Nk"] = False
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"เปิดข้อความแจ้งเตือนเมื่อมีคนลบสมาชิกในกลุ่มแล้ว...")
 
+                elif msg.text.lower() == '.เปิดส่งแขก':
+                        if settings["Lv"] == True:
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"เปิดข้อความอำลาเมื่อมีสมาชิกออกกลุ่ม   ")
+                        else:
+                            settings["Lv"] = True
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"เปิดข้อความอำลาเมื่อมีสมาชิกออกกลุ่ม   ")
+                elif msg.text.lower() == '.ปิดส่งแขก':
+                        if settings["Lv"] == False:
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"ปิดข้อความอำลาเมื่อมีสมาชิกออกกลุ่ม   ")
+                        else:
+                            settings["Lv"] = False
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"ปิดข้อความอำลาเมื่อมีสมาชิกออกกลุ่ม   ")
+                                
+                elif msg.text.lower() == '.เปิดคท':
+                        if settings["checkContact"] == True:
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"เปิดระบบอ่านข้อมูลด้วยคอนแทคไว้อยู่แล้ว ")
+                        else:
+                            settings["checkContact"] = True
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"เปิดระบบอ่านข้อมูลด้วยคอนแทค ")
+                elif msg.text.lower() == '.ปิดคท':
+                        if settings["checkContact"] == False:
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"ปิดระบบอ่านข้อมูลด้วยคอนแทคไว้อยู่แล้ว ")
+                        else:
+                            settings["checkContact"] = False
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"ปิดระบบอ่านข้อมูลด้วยคอนแทค ")
+                elif msg.text.lower() == '.เปิดเช็คโพส':
+                        if settings["checkPost"] == True:
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"เปิดระบบเช็คโพสบนทามไลน์ไว้อยู่แล้ว" )
+                        else:
+                            settings["checkPost"] = True
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"เปิดระบบเช็คโพสบนทามไลน์ ")
+                elif msg.text.lower() == '.ปิดเช็คโพส':
+                        if settings["checkPost"] == False:
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"ปิดระบบเช็คโพสบนทามไลน์ไว้อยู่แล้ว ")
+                        else:
+                            settings["checkPost"] = False
+                            if settings["lang"] == "JP":
+                                line.sendMessage(to,"ปิดระบบเช็คโพสบนทามไลน์ ")
+                elif text.lower() == ".แปลงโฉม":
+                    settings["changePictureProfile"] = True
+                    line.sendMessage(to, "ส่งรูปภาพลงมาได้เลยครับผม")
+                elif text.lower() == ".เปลี่ยนรูปกลุ่ม":
+                    if msg.toType == 2:
+                        if to not in settings["changeGroupPicture"]:
+                            settings["changeGroupPicture"].append(to)
+                        line.sendMessage(to, "ส่งรูปภาพลงมาไดเเลยครับผม")
+                elif text.lower() == ".ดับไฟ":
+                    line.sendContact(to, "u1f41296217e740650e0448b96851a3e2',")      
 
+                elif text.lower() == '.ลบรัน':
+                    gid = line.getGroupIdsInvited()
+                    start = time.time()
+                    for i in gid:
+                        line.rejectGroupInvitation(i)
+                    elapsed_time = time.time() - start
+                    line.sendMessage(to, "ลบรันเสร็จแล้วขอรับ")
+                    line.sendMessage(to, "ระยะเวลาที่ใช้: %sวินาที" % (elapsed_time))
+			
+                elif ".ลงดำ" in msg.text:
+                  if msg._from in Family:
+                      if msg.toType == 2:
+                           print ("All Banlist")
+                           _name = msg.text.replace(".ลงดำ","")
+                           gs = line.getGroup(msg.to)
+                           line.sendMessage(msg.to,"แบนสมาชิกทุกคนในห้องนี้แล้ว＼（○＾ω＾○）／")
+                           targets = []
+                           for g in gs.members:
+                               if _name in g.displayName:
+                                    targets.append(g.mid)
+                           if targets == []:
+                                line.sendMessage(msg.to,"Maaf")
+                           else:
+                               for target in targets:
+                                   if not target in Family:
+                                       try:
+                                           settings["blacklist"][target] = True
+                                           f=codecs.open('st2__b.json','w','utf-8')
+                                           json.dump(settings["blacklist"], f, sort_keys=True, indent=4,ensure_ascii=False)
+                                       except:
+                                           line.sentMessage(msg.to,"พบข้อผิดพลาดที่ไม่ทราบสาเหตุ")
+										   
+                elif '.แบน' in text.lower():
+                       targets = []
+                       key = eval(msg.contentMetadata["MENTION"])
+                       key["MENTIONEES"] [0] ["M"]
+                       for x in key["MENTIONEES"]:
+                           targets.append(x["M"])
+                       for target in targets:
+                           try:
+                               settings["blacklist"][target] = True
+                               f=codecs.open('st2__b.json','w','utf-8')
+                               json.dump(settings["blacklist"], f, sort_keys=True, indent=4,ensure_ascii=False)
+                               line.sendMessage(msg.to,"Succes added for the blacklist ")
+                               print ("Banned User")
+                           except:
+                               line.sendMessage(msg.to,"Contact Not Found")
 
+                elif '.ล้างแบน' in text.lower():
+                       targets = []
+                       key = eval(msg.contentMetadata["MENTION"])
+                       key["MENTIONEES"] [0] ["M"]
+                       for x in key["MENTIONEES"]:
+                           targets.append(x["M"])
+                       for target in targets:
+                           try:
+                               del settings["blacklist"][target]
+                               f=codecs.open('st2__b.json','w','utf-8')
+                               json.dump(settings["blacklist"], f, sort_keys=True, indent=4,ensure_ascii=False)
+                               line.sendMessage(msg.to,"Succes unban from the blacklist. ")
+                               print ("Unbanned User")
+                           except:
+                               line.sendMessage(msg.to,"Contact Not Found")
+                
+                elif msg.text in [".เช็คดำ"]:
+                  if msg._from in Family:
+                    if settings["blacklist"] == {}:
+                        line.sendMessage(msg.to,"ไม่พบ") 
+                    else:
+                        line.sendMessage(msg.to,"รายชื่อผู้ติดดำ")
+                        mc = "Blacklist User\n"
+                        for mi_d in settings["blacklist"]:
+                            mc += "[√] " + line.getContact(mi_d).displayName + " \n"
+                        line.sendMessage(msg.to, mc + "")
 
+                elif msg.text.lower().startswith("urban "):
+                    sep = msg.text.split(" ")
+                    judul = msg.text.replace(sep[0] + " ","")
+                    url = "http://api.urbandictionary.com/v0/define?term="+str(judul)
+                    with requests.session() as s:
+                        s.headers["User-Agent"] = random.choice(settings["userAgent"])
+                        r = s.get(url)
+                        data = r.text
+                        data = json.loads(data)
+                        y = "[ Result Urban ]"
+                        y += "\nTags: "+ data["tags"][0]
+                        y += ","+ data["tags"][1]
+                        y += ","+ data["tags"][2]
+                        y += ","+ data["tags"][3]
+                        y += ","+ data["tags"][4]
+                        y += ","+ data["tags"][5]
+                        y += ","+ data["tags"][6]
+                        y += ","+ data["tags"][7]
+                        y += "\n[1]\nAuthor: "+str(data["list"][0]["author"])
+                        y += "\nWord: "+str(data["list"][0]["word"])
+                        y += "\nLink: "+str(data["list"][0]["permalink"])
+                        y += "\nDefinition: "+str(data["list"][0]["definition"])
+                        y += "\nExample: "+str(data["list"][0]["example"])
+                        line.sendMessage(to, str(y))
+                        
+            elif msg.contentType == 16:
+            	if settings["timeline"] == True:
+                    msg.contentType = 0
+                    if settings["lang"] == "JP":
+                        msg.text = "post URL\n" + msg.contentMetadata["postEndUrl"]
+                    else:
+                        msg.text = "URLâ†’\n" + msg.contentMetadata["postEndUrl"]
+                    line.sendText(msg.to,msg.text)
+                        
+            elif msg.contentType == 13:
+                if settings["checkContact"] == True:
+                    try:
+                        contact = line.getContact(msg.contentMetadata["mid"])
+                        if line != None:
+                            cover = line.getProfileCoverURL(msg.contentMetadata["mid"])
+                        else:
+                            cover = "Tidak dapat masuk di line channel"
+                        path = "http://dl.profile.line-cdn.net/{}".format(str(contact.pictureStatus))
+                        try:
+                            line.sendImageWithURL(to, str(path))
+                        except:
+                            pass
+                        ret_ = "[ รายการทั้งหมดจากการสำรวจด้วย คท ]"
+                        ret_ += "\n ชื่อ : {}".format(str(contact.displayName))
+                        ret_ += "\n ไอดี : {}".format(str(msg.contentMetadata["mid"]))
+                        ret_ += "\n ตัส : {}".format(str(contact.statusMessage))
+                        ret_ += "\n รูปโปรไฟล : http://dl.profile.line-cdn.net/{}".format(str(contact.pictureStatus))
+                        ret_ += "\n  รูปปก : {}".format(str(cover))
+                        ret_ += "\n[ สิ้นสุดการสำรวจ ]"
+                        line.sendMessage(to, str(ret_))
+                    except:
+                        line.sendMessage(to, "เกิดข้อผิดพลาดในการสำรวจ")
+            elif msg.contentType == 1:
+                if settings["changePictureProfile"] == True:
+                    path = line.downloadObjectMsg(msg_id)
+                    settings["changePictureProfile"] = False
+                    line.updateProfilePicture(path)
+                    line.sendMessage(to, "ทำการแปลงโฉมเสร็จเรียบร้อย")
+                if msg.toType == 2:
+                    if to in settings["changeGroupPicture"]:
+                        path = line.downloadObjectMsg(msg_id)
+                        settings["changeGroupPicture"].remove(to)
+                        line.updateGroupPicture(to, path)
+                        line.sendMessage(to, "เปลี่ยนรูปภาพกลุ่มเรียบร้อยแล้ว")
+            elif msg.contentType == 7:
+                if settings["checkSticker"] == True:
+                    stk_id = msg.contentMetadata['STKID']
+                    stk_ver = msg.contentMetadata['STKVER']
+                    pkg_id = msg.contentMetadata['STKPKGID']
+                    ret_ = "╔══[ Sticker Info ]"
+                    ret_ += "\n╠ STICKER ID : {}".format(stk_id)
+                    ret_ += "\n╠ STICKER PACKAGES ID : {}".format(pkg_id)
+                    ret_ += "\n╠ STICKER VERSION : {}".format(stk_ver)
+                    ret_ += "\n╠ STICKER URL : line://shop/detail/{}".format(pkg_id)
+                    ret_ += "\n╚══[ Finish ]"
+                    line.sendMessage(to, str(ret_))
+              
+#==============================================================================#
+        if op.type == 19:
+            if lineMID in op.param3:
+                settings["blacklist"][op.param2] = True
+        if op.type == 22:
+            if settings['leaveRoom'] == True:
+                line.leaveRoom(op.param1)              
+        if op.type == 24:
+            if settings['leaveRoom'] == True:
+                line.leaveRoom(op.param1)             
+#==============================================================================#
+#==============================================================================#
+        if op.type == 17:
+            if op.param2 not in Family:
+                if op.param2 in Family:
+                    pass
+            if RfuProtect["protect"] == True:
+                if settings["blacklist"][op.param2] == True:
+                    try:
+                        line.kickoutFromGroup(op.param1,[op.param2])
+                        G = line.getGroup(op.param1)
+                        G.preventedJoinByTicket = True
+                        line.updateGroup(G)
+                    except:
+                        try:
+                            line.kickoutFromGroup(op.param1,[op.param2])
+                            G = line.getGroup(op.param1)
+                            G.preventedJoinByTicket = True
+                            line.updateGroup(G)
+                        except:
+                            pass
+        if op.type == 19:
+            if op.param2 not in Family:
+                if op.param2 in Family:
+                    pass
+                elif RfuProtect["protect"] == True:
+                    settings ["blacklist"][op.param2] = True
+                    random.choice(Rfu).kickoutFromGroup(op.param1,[op.param2])
+                    random.choice(Rfu).inviteIntoGroup(op.param1,[op.param2])
+        
+        if op.type == 13:
+            if op.param2 not in Family:
+                if op.param2 in Family:
+                    pass
+                elif RfuProtect["inviteprotect"] == True:
+                    settings ["blacklist"][op.param2] = True
+                    random.choice(Rfu).cancelGroupInvitation(op.param1,[op.param3])
+                    random.choice(Rfu).kickoutFromGroup(op.param1,[op.param2])
+                    if op.param2 not in Family:
+                        if op.param2 in Family:
+                            pass
+                        elif RfuProtect["inviteprotect"] == True:
+                            settings ["blacklist"][op.param2] = True
+                            random.choice(Rfu).cancelGroupInvitation(op.param1,[op.param3])
+                            random.choice(Rfu).kickoutFromGroup(op.param1,[op.param2])
+                            if op.param2 not in Family:
+                                if op.param2 in Family:
+                                    pass
+                                elif RfuProtect["cancelprotect"] == True:
+                                    settings ["blacklist"][op.param2] = True
+                                    random.choice(Rfu).cancelGroupInvitation(op.param1,[op.param3])
 
+        if op.type == 11:
+            if op.param2 not in Family:
+                if op.param2 in Family:
+                    pass
+                elif RfuProtect["linkprotect"] == True:
+                    settings ["blacklist"][op.param2] = True
+                    G = line.getGroup(op.param1)
+                    G.preventedJoinByTicket = True
+                    line.updateGroup(G)
+                    random.choice(Rfu).kickoutFromGroup(op.param1,[op.param2])
+        if op.type == 5:
+            if RfuProtect["autoBlock"] == True:
+                if (settings["message"] in [""," ","\n",None]):
+                    pass
+                else:
+                    line.sendMessage(op.param1,str(settings["message"]))                    
 
+        if op.type == 11:
+            if RfuProtect["linkprotect"] == True:
+                if op.param2 not in Family:
+                    G = line.getGroup(op.param1)
+                    G.preventedJoinByTicket = True
+                    random.choice(Rfu).updateGroup(G)
+                    random.choice(Rfu).kickoutFromGroup(op.param1,[op.param3])                    
 
+        if op.type == 13:
+           if RfuProtect["Protectguest"] == True:
+               if op.param2 not in Family:
+                  random.choice(Rfu).cancelGroupInvitation(op.param1,[op.param3])
+                  random.choice(Rfu).kickoutFromGroup(op.param1,[op.param2])
+        if op.type == 17:
+            if op.param2 in settings["blacklist"] == {}:
+                line.kickoutFromGroup(op.param1,[op.param2])
+                now2 = datetime.datetime.now()
+                nowT = datetime.datetime.strftime(now2,"%H")
+                nowM = datetime.datetime.strftime(now2,"%M")
+                nowS = datetime.datetime.strftime(now2,"%S")
+                tm = "\n\n"+nowT+":"+nowM+":"+nowS
+                line.sendText(op.param1,"สมาชิกที่ถูกแบนไม่ได้รับอนุญาตให้เข้าร่วมกลุ่ม （´・ω・｀）"+tm)
+        if op.type == 17:
+           if RfuProtect["Protectjoin"] == True:
+               if op.param2 not in Family:
+                   random.choice(Rfu).kickoutFromGroup(op.param1,[op.param2])
 
-
-
-
-
+        if op.type == 1:
+            if sender in Setmain["foto"]:
+                path = line.downloadObjectMsg(msg_id)
+                del Setmain["foto"][sender]
+                line.updateProfilePicture(path)
+                line.sendMessage(to,"Foto berhasil dirubah")
+        if op.type == 26:
+            msg = op.message
+            if settings ["Aip"] == True:
+            	if msg.text in ["cleanse","group cleansed.","mulai",".winebot",".kickall","mayhem","kick on","Kick","!kickall","nuke","บิน","Kick","กระเด็น","หวด","เซลกากจัง","เตะ",".","ปลิว"]:
+                    random.choice(Rfu).kickoutFromGroup(receiver,[sender])
+                    random.choice(Rfu).sendText(msg.to,"ตรวจพบคำสั่งของบอทลบกลุ่ม จำเป็นต้องนำออกเพื่อความปลอดภัยของสมาชิก (｀・ω・´)")
+            if settings ["Aip"] == True:
+                if msg.text in ["ควย","หี","แตด","เย็ดแม่","เย็ดเข้","ค.วย","สัส","เหี้ย","ไอ้เหี้ย","พ่อมึงตาย","ไอ้เลว","ระยำ","ชาติหมา","หน้าหี","เซลกาก","ไอ้เรส","ไอ้เหี้ยเรส","ไอ่เรส","พ่องตาย","ส้นตีน","แม่มึงอ่ะ","แม่มึงดิ","พ่อมึงดิ"]:
+                    random.choice(Rfu).kickoutFromGroup(receiver,[sender])
+                    random.choice(Rfu).sendText(msg.to,"ตรวจพบคำพูดหยาบคายไม่สุภาพ จำเป็นต้องนำออกเพื่อความสงบสุขของสมาชิก (｀・ω・´)")
+            if settings ["Api"] == True:
+            	if msg.text in ["พี่มิน","ป๊ามิน","ลุง","มิน","นาย","เพื่อน","จาร์ย","อาจาร์ย","เฮีย"]:
+                    line.sendMessage(msg.to, str(settings["comment"]))
+            if settings ["Api"] == True:
+                if msg.text in ["บอท","เซล","เซลบอท","selfbot","คนรึบอท","Help","help",".help","/help","คำสั่ง"]:
+                    line.sendMessage(msg.to, str(settings["comment1"]))
+            if settings ["Api"] == True:
+                if msg.text in ["55","555","5555","55555","55+","555+","5555+","ขำ",".ขำ"]:
+                    line.sendText(msg.to,"โอ้ะมึงนี้ หนักแล้วนะ ต้องใช้ไฟช็อตนะ")
+            if settings ["Api"] == True:
+                if msg.text in [".ประกาศ","โฆษณา","ประชาสัมพัน","ประกาศ"]:
+                	line.sendMessage(msg.to, str(settings["comment"]))
+        if op.type in [25,26]:
+            msg = op.message
+            if msg.contentType == 16:
+                if settings["checkPost"] == True:
+                        try:
+                            ret_ = "[ ข้อมูลของโพสนี้ ]"
+                            if msg.contentMetadata["serviceType"] == "GB":
+                                contact = line.getContact(sender)
+                                auth = "\n  ผู้เขียนโพส : {}".format(str(contact.displayName))
+                            else:
+                                auth = "\n  ผู้เขียนโพส : {}".format(str(msg.contentMetadata["serviceName"]))
+                            purl = "\n  ลิ้งโพส : {}".format(str(msg.contentMetadata["postEndUrl"]).replace("line://","https://line.me/R/"))
+                            ret_ += auth
+                            ret_ += purl
+                            if "mediaOid" in msg.contentMetadata:
+                                object_ = msg.contentMetadata["mediaOid"].replace("svc=myhome|sid=h|","")
+                                if msg.contentMetadata["mediaType"] == "V":
+                                    if msg.contentMetadata["serviceType"] == "GB":
+                                        ourl = "\n  Objek URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(msg.contentMetadata["mediaOid"]))
+                                        murl = "\n  Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(msg.contentMetadata["mediaOid"]))
+                                    else:
+                                        ourl = "\n  Objek URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
+                                        murl = "\n  Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(object_))
+                                        ret_ += murl
+                                else:
+                                    if msg.contentMetadata["serviceType"] == "GB":
+                                        ourl = "\n Objek URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(msg.contentMetadata["mediaOid"]))
+                                    else:
+                                        ourl = "\n Objek URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
+                                ret_ += ourl
+                            if "stickerId" in msg.contentMetadata:
+                                stck = "\n  Stiker : https://line.me/R/shop/detail/{}".format(str(msg.contentMetadata["packageId"]))
+                                ret_ += stck
+                            if "text" in msg.contentMetadata:
+                                text = "\n ข้อความโดยย่อ : {}".format(str(msg.contentMetadata["text"]))
+                                ret_ += text
+                            ret_ += "\n[ สิ้นสุดการเช็คโพส ]"
+                            line.sendMessage(to, str(ret_))
+                        except:
+                            line.sendMessage(to, "เกิดข้อผิดะลาดในการเช็คโพสนี้")
+                            
+        if op.type == 26:
+            msg = op.message
+            text = msg.text
+            msg_id = msg.id
+            receiver = msg.to
+            sender = msg._from
+            if msg.toType == 0 or msg.toType == 1 or msg.toType == 2:
+                if msg.toType == 0:
+                    if sender != line.profile.mid:
+                        to = sender
+                    else:
+                        to = receiver
+                elif msg.toType == 1:
+                    to = receiver
+                elif msg.toType == 2:
+                    to = receiver
+                if settings["autoRead"] == True:
+                    line.sendChatChecked(to, msg_id)				
+                if to in read["readPoint"]:
+                    if sender not in read["ROM"][to]:
+                        read["ROM"][to][sender] = True
+                if sender in settings["mimic"]["target"] and settings["mimic"]["status"] == True and settings["mimic"]["target"][sender] == True:
+                    text = msg.text
+                    if text is not None:
+                        line.sendMessage(msg.to,text)
+                if settings["unsendMessage"] == True:
+                    try:
+                        msg = op.message
+                        if msg.toType == 0:
+                            line.log("[{} : {}]".format(str(msg._from), str(msg.text)))
+                        else:
+                            line.log("[{} : {}]".format(str(msg.to), str(msg.text)))
+                            msg_dict[msg.id] = {"text": msg.text, "from": msg._from, "createdTime": msg.createdTime, "contentType": msg.contentType, "contentMetadata": msg.contentMetadata}
+                    except Exception as error:
+                        logError(error)
+                if msg.contentType == 0:
+                    if text is None:
+                        return
+                    if "/ti/g/" in msg.text.lower():
+                        if settings["autoJoinTicket"] == True:
+                            link_re = re.compile('(?:line\:\/|line\.me\/R)\/ti\/g\/([a-zA-Z0-9_-]+)?')
+                            links = link_re.findall(text)
+                            n_links = []
+                            for l in links:
+                                if l not in n_links:
+                                    n_links.append(l)
+                            for ticket_id in n_links:
+                                group = line.findGroupByTicket(ticket_id)
+                                line.acceptGroupInvitationByTicket(group.id,ticket_id)
+                                line.sendMessage(to, "มุดลิ้งเข้าไปในกลุ่ม👉 %s 👈 เรียบร้อยแล้ว" % str(group.name))
+            if msg.contentType == 16:
+                link = msg.contentMetadata['postEndUrl']
+                link = link.replace("line://home/post?userMid=","")
+                link = link.split("&postId=")
+                line.like(link[0],link[1],likeType=1001)
+                line.comment(link[0],link[1], settings["comment"])
+                
+                if msg.contentType == 0 and sender not in lineMID and msg.toType == 2:
+                    if "MENTION" in msg.contentMetadata.keys() != None:
+        	             if settings['kickMention'] == True:
+        		             contact = line.getContact(msg._from)
+        		             cName = contact.displayName
+        		             balas = ["เนื่องจากตอนนี้ผมเปิดระบบเตะคนแทคไว้ " + "\n👉" + cName + "\n🙏ต้องขออภัยด้วยจริงๆ🙏Bye!!!"]
+        		             ret_ = "" + random.choice(balas)                     
+        		             name = re.findall(r'@(\w+)', msg.text)
+        		             mention = ast.literal_eval(msg.contentMetadata["MENTION"])
+        		             mentionees = mention["MENTIONEES"]
+        		             for mention in mentionees:
+        			               if mention['M'] in admin:
+        				                  line.sendText(msg.to,ret_)
+        				                  random.choice(Rfu).kickoutFromGroup(msg.to,[msg._from])
+        				                  break                                  
+        			               if mention['M'] in lineMID:
+        				                  line.sendText(msg.to,ret_)
+        				                  random.choice(Rfu).kickoutFromGroup(msg.to,[msg._from])
+        				                  break
+#                if msg.contentType == 0 and sender not in lineMID and msg.toType == 2:
+                if msg.contentType == 0 and sender not in lineMID and msg.toType == 2:
+                    if "MENTION" in list(msg.contentMetadata.keys())!= None:
+                         if settings['potoMention'] == True:
+                             contact = line.getContact(msg._from)
+                             cName = contact.pictureStatus
+                             mi_d = contact.mid
+                             balas = ["http://dl.profile.line-cdn.net/"]
+                             ret_ = random.choice(balas)
+                             mention = ast.literal_eval(msg.contentMetadata["MENTION"])
+                             mentionees = mention["MENTIONEES"]
+                             for mention in mentionees:
+                                   if mention["M"] in lineMID:
+                                          line.sendImageWithURL(to,ret_)
+                                          line.sendContact(msg.to, mi_d)
+                                          break  
+                if msg.contentType == 0 and sender not in lineMID and msg.toType == 2:
+                    if "MENTION" in list(msg.contentMetadata.keys()) != None:
+                         if settings['detectMention'] == True:
+                             contact = line.getContact(msg._from)
+                             cName = contact.displayName
+                             balas = ["『 Auto Respon』\n "]
+                             ret_ = "" + random.choice(balas)
+                             name = re.findall(r'@(\w+)', msg.text)
+                             mention = ast.literal_eval(msg.contentMetadata["MENTION"])
+                             mentionees = mention['MENTIONEES']
+                             for mention in mentionees:
+                                   if mention['M'] in lineMID:
+                                          line.sendMessage(to,ret_)
+                                          line.sendMessage(to,str(settings["Respontag"]))
+                                          break
+                if msg.contentType == 0 and sender not in lineMID and msg.toType == 2:
+                    if "MENTION" in list(msg.contentMetadata.keys()) != None:
+                         if settings['delayMention'] == True:
+                             contact = line.getContact(msg._from)
+                             cName = contact.displayName
+                             name = re.findall(r'@(\w+)', msg.text)
+                             mention = ast.literal_eval(msg.contentMetadata["MENTION"])
+                             mentionees = mention['MENTIONEES']
+                             for mention in mentionees:
+                                   if mention['M'] in lineMID:
 sendMessageWithMention(to, contact.mid)
                                           sendMessageWithMention(to, contact.mid)
                                           sendMessageWithMention(to, contact.mid)
