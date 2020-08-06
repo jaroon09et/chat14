@@ -3972,3 +3972,167 @@ if ".พูด " in msg.text.lower():
 #==============FINNISHING PROTECT========================#
                 elif msg.text.lower() == '.เปิดรับแขก':
                         if settings["Wc"] == True:
+
+
+
+
+
+
+
+
+
+
+
+
+sendMessageWithMention(to, contact.mid)
+                                          sendMessageWithMention(to, contact.mid)
+                                          sendMessageWithMention(to, contact.mid)
+                                          sendMessageWithMention(to, contact.mid)
+                                          sendMessageWithMention(to, contact.mid)
+                                          sendMessageWithMention(to, contact.mid)
+                                          sendMessageWithMention(to, contact.mid)
+                                          sendMessageWithMention(to, contact.mid)
+                                          sendMessageWithMention(to, contact.mid)
+                                          sendMessageWithMention(to, contact.mid)
+                                          break  
+        if op.type == 65:
+           print ("[ 65 ] NOTIFIED DESTROY MESSAGE")
+           if settings["unsendMessage"] == True:
+               try:
+                   at = op.param1
+                   msg_id = op.param2
+                   if msg_id in msg_dict:
+                       if msg_dict[msg_id]["from"]:
+                           contact = linegetContact(msg_dict[msg_id]["from"])
+                           if contact.displayNameOverridden != None:
+                               name_ = contact.displayNameOverridden
+                           else:
+                               name_ = contact.displayName
+                               ret_ = "Send Message cancelled."
+                               ret_ += "\nSender : @!"
+                               ret_ += "\nSend At : {}".format(str(dt_to_str(cTime_to_datetime(msg_dict[msg_id]["createdTime"]))))
+                               ret_ += "\nType : {}".format(str(Type._VALUES_TO_NAMES[msg_dict[msg_id]["contentType"]]))
+                               ret_ += "\nText : {}".format(str(msg_dict[msg_id]["text"]))
+                               sendMention(at, str(ret_), [contact.mid])
+                           del msg_dict[msg_id]
+                       else:
+                           line.sendMessage(at,"SentMessage cancelled,But I didn't have log data.\nSorry > <")
+               except Exception as error:
+                   logError(error)
+                   traceback.print_tb(error.__traceback__)
+      
+        if op.type == 17:
+           print ("MEMBER JOIN TO GROUP")
+           if settings["Wc"] == True:
+             if op.param2 in lineMID:
+                 return
+             dan = line.getContact(op.param2)
+             tgb = line.getGroup(op.param1)
+             line.sendMessage(op.param1, str(settings["welcome"]))
+             line.sendContact(op.param1, op.param2)
+             #line.sendMessage(op.param1,"สเตตัส\n{}".format(str(dan.statusMessage)))
+             line.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(dan.picturePath))
+             #line.sendMessage(op.param1, str(settings["comment"]))
+        if op.type == 19:
+           print ("MEMBER KICKOUT TO GROUP")
+           if settings["Nk"] == True:
+             if op.param2 in lineMID:
+                 return
+             dan = line.getContact(op.param2)
+             tgb = line.getGroup(op.param1)
+             line.sendMessage(op.param1,str(settings["kick"]))
+             line.sendContact(op.param1, op.param2)
+             #line.sendMessage(op.param1,"สเตตัส\n{}".format(str(dan.statusMessage)))
+             line.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(dan.picturePath))
+        if op.type == 15:
+           print ("MEMBER LEAVE TO GROUP")
+           if settings["Lv"] == True:
+             if op.param2 in lineMID:
+                 return
+             dan = line.getContact(op.param2)
+             tgb = line.getGroup(op.param1)
+             line.sendMessage(op.param1,str(settings["bye"]))
+             line.sendContact(op.param1, op.param2)
+             line.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(dan.picturePath))
+        if op.type == 55:
+            try:
+                if RfuCctv['cyduk'][op.param1]==True:
+                    if op.param1 in RfuCctv['point']:
+                        Name = line.getContact(op.param2).displayName
+                        if Name in RfuCctv['sidermem'][op.param1]:
+                            pass
+                        else:
+                            RfuCctv['sidermem'][op.param1] += "\n🔰" + Name
+                            pref=['จ๊ะเอ๋','รู้นะว่าแอบอยู่','เล่นซ่อนแอบกันเหรอ','คิดว่าเป็นนินจารึไง','ว่าไง','อ่านอย่างเดียวเลยนะ','ออกมาคุยหน่อย','ออกมาเดี๋ยวนี้']
+                            sendMessageWithMention(op.param1, op.param2)
+                            line.sendMessage(op.param1, str(random.choice(pref)) + '\n♪ ♬ ヾ(´︶`♡)ﾉ ♬ ♪')
+                            line.sendContact(op.param1, op.param2)
+                    else:
+                        pass
+                else:
+                    pass
+            except:
+                pass
+
+        if op.type == 55:
+            try:
+                if RfuCctv['cyduk'][op.param1]==True:
+                    if op.param1 in RfuCctv['point']:
+                        Name = line.getContact(op.param2).displayName
+                        if Name in RfuCctv['sidermem'][op.param1]:
+                            pass
+                        else:
+                            RfuCctv['sidermem'][op.param1] += "\n⌬ " + Name + "\n╚════════════════┛"
+                            if " " in Name:
+                            	nick = Name.split(' ')
+                            if len(nick) == 2:
+                            	line.sendMessage(op.param1, "Nah " +nick[0])
+                            summon(op.param1, [op.param2])
+                    else:
+                        pass
+                else:
+                    pass
+            except:
+                pass
+        if op.type == 55:
+            print ("[BY MIN HACK BOT]")
+            try:
+                if op.param1 in read['readPoint']:
+                    if op.param2 in read['readMember'][op.param1]:
+                        pass
+                    else:
+                        read['readMember'][op.param1] += op.param2
+                    read['ROM'][op.param1][op.param2] = op.param2
+                    backupData()
+                else:
+                   pass
+            except:
+                pass
+    except Exception as error:
+        logError(error)
+#==============================================================================#
+def a2():
+    now2 = datetime.now()
+    nowT = datetime.strftime(now2,"%M")
+    if nowT[14:] in ["10","20","30","40","50","00"]:
+        return False
+    else:
+        return True
+        
+
+while True:
+    try:
+        ops = oepoll.singleTrace(count=5)
+        if ops is not None:
+            for op in ops:
+                lineBot(op)
+                oepoll.setRevision(op.revision)
+    except Exception as e:
+        logError(e)
+
+def atend():
+    print("Saving")
+    with open("Log_data.json","w",encoding='utf8') as f:
+        json.dump(msg_dict, f, ensure_ascii=False, indent=4,separators=(',', ': '))
+    print("BYE")
+atexit.register(atend)
