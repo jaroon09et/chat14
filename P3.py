@@ -793,7 +793,7 @@ def lineBot(op):
                 if text is None:
                     return
 #==============================================================================#
-                if ".พูด " in msg.text.lower():
+                 if ".พูด " in msg.text.lower():
                     spl = re.split(".พูด ",msg.text,flags=re.IGNORECASE)
                     if spl[0] == "":
                         mts = spl[1]
@@ -832,7 +832,7 @@ def lineBot(op):
                     line.sendMessage(to, str(helpTextToSpeech))
                 elif text.lower() == '.sett':
                     helpLanguange = helplanguange()
-                    line.sendMessage(to, str(helpLanguange))
+                    line.sendMessage(to, str(helpLanguange))             
 #==============================================================================#
                 elif text.lower() == '.sp':
                     start = time.time()
